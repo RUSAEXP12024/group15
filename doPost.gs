@@ -33,8 +33,8 @@ function doPost(e) {
 
 function addLog(latitude, longitude) {
   // 記録するスプレッドシートを指定
-  let spreadsheetId = "1S2L5ozWAy5BkZ2oIoRzs2_Vm_ztoXXfuDXGWOzQ-Vwo"; // スプレッドシートID
-  let sheetName = "緯度と経度"; // スプレッドシート名
+  let spreadsheetId = "スプレッドシートID"; // スプレッドシートID
+  let sheetName = "スプレッドシート名"; // スプレッドシート名
   let spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   let sheet = spreadsheet.getSheetByName(sheetName);
 
