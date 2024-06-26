@@ -33,14 +33,14 @@ function doPost(e) {
   
   function addLog(latitude, longitude) {
     // 記録するスプレッドシートを指定
-    let spreadsheetId = "スプレッドシートID"; // スプレッドシートID
-    let sheetName = "スプレッドシート名"; // スプレッドシート名
+    let spreadsheetId = "15-uGNql16Hn7qikukdOmqbN1wYklsN76Jlh2JhWAqlE"; // スプレッドシートID
+    let sheetName = "位置情報"; // スプレッドシート名
     let spreadsheet = SpreadsheetApp.openById(spreadsheetId);
     let sheet = spreadsheet.getSheetByName(sheetName);
   
     // ショートカットから送信された位置情報をスプレッドシートに記録
     let today = new Date();
-    sheet.appendRow([Utilities.formatDate(today, 'JST', 'yyyy-MM-dd HH:mm:ss'), latitude, longitude]);
+    sheet.appendRow([latitude, longitude]);
   
     // シートの整形
     let range = sheet.getDataRange();
