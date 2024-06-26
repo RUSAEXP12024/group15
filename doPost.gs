@@ -32,18 +32,20 @@ function doPost(e) {
   }
   
   function addLog(latitude, longitude) {
-    // 記録するスプレッドシートを指定
-    let spreadsheetId = "スプレッドシートID"; // スプレッドシートID
-    let sheetName = "スプレッドシート名"; // スプレッドシート名
-    let spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-    let sheet = spreadsheet.getSheetByName(sheetName);
-  
-    // ショートカットから送信された位置情報をスプレッドシートに記録
-    let today = new Date();
-    sheet.appendRow([Utilities.formatDate(today, 'JST', 'yyyy-MM-dd HH:mm:ss'), latitude, longitude]);
-  
-    // シートの整形
-    let range = sheet.getDataRange();
-    range.setHorizontalAlignment("left"); // 文字を左揃えに統一
-  }
-  
+  // 記録するスプレッドシートを指定
+  let spreadsheetId = "15-uGNql16Hn7qikukdOmqbN1wYklsN76Jlh2JhWAqlE"; // スプレッドシートID
+  let sheetName = "位置情報"; // スプレッドシート名
+  let spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  let sheet = spreadsheet.getSheetByName(sheetName);
+
+  // 既存のデータを下にシフトする
+  let range = sheet.getRange("A2:B2"); // 既存の最初の行を選択
+  range.copyTo(sheet.getRange("A3"), {contentsOnly:true}); // データを1行下にコピー
+
+  // 新しい位置情報を1行目に挿入
+  sheet.getRange("A2:B2").setValues([[latitude, longitude]]);
+
+  // シートの整形
+  range = sheet.getDataRange();
+  range.setHorizontalAlignment("left"); // 文字を左揃えに統一
+}
