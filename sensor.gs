@@ -40,10 +40,7 @@ function setDistance(charto, dataplace, dist){
   getSheet(charto).getRange(dataplace, 1, 1, 1).setValue([[dist]]);
 }
 
-function dataCopy(charfrom, charto, a1, a2, a3 = 1, a4 = 1, b1 = a1, b2 = a2+1){
-  var data = getSheet(charfrom).getRange(a1, a2, a3, a4).getValue();
-  getSheet(charto).getRange(b1, b2, a3, a4).setValue(data);
-}
+
 
 /*getRange(始める高さ, 始める行, 入力する高さ分, 入力する横の長さ分)*/
 

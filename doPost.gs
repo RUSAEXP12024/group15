@@ -32,11 +32,8 @@ function doPost(e) {
   }
   
   function addLog(latitude, longitude) {
-  // 記録するスプレッドシートを指定
-  let spreadsheetId = "15-uGNql16Hn7qikukdOmqbN1wYklsN76Jlh2JhWAqlE"; // スプレッドシートID
-  let sheetName = "位置情報"; // スプレッドシート名
-  let spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-  let sheet = spreadsheet.getSheetByName(sheetName);
+
+    let sheet = getSheet('位置情報');
 
   // 既存のデータを下にシフトする
   let range = sheet.getRange("A2:B2"); // 既存の最初の行を選択
