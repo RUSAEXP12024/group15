@@ -1,4 +1,4 @@
-var NATURE_REMO_TOKEN = "Nature Remo Token";
+var NATURE_REMO_TOKEN = "";
 var AIRCON_ID = "エアコンのID"
 
 function Aircon_ON(){

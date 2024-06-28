@@ -22,7 +22,7 @@ var arg2 = {
 function main(){
   /*現在の経緯度と家の経緯度をそれぞれ arg1, arg2 に代入*/
   arg1 = getLocateData(GET_FROM, 2, 1);
-  arg2 = getLocateData(HOME_LOCATE, 2, 2);
+  arg2 = getLocateData(HOME_LOCATE, 1, 2);
   console.log(arg1)
   console.log(arg2)
 
