@@ -36,17 +36,18 @@ function main(){
   setDistance(DIST_DATA, 2, dist);
   
   /*シート状に置かれた設定を代入*/
-  onRange = getSheet(DIST_DATA).getRange(6, 1, 1, 1).getValue()[0][0];
-  offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue()[0][0];
+  onRange = getSheet(DIST_DATA).getRange(6, 1, 1, 1).getValue();
+  offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue();
 
   isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に true か　false を代入*/
+  // isAirConditioner = true; //確認用
 
   /*ジャッジの結果のbool値を基に挙動を決定　true->オン false->オフ nullまたはその他->エラー*/
 
-  if(isAirConditioner){
+  if(isAirConditioner == true){
     /*エアコンをオンにする関数*/
     Aircon_ON();
-  }else if(!isAirConditioner){
+  }else if(isAirConditioner == false){
     /*エアコンをオフにする関数*/
     Aircon_OFF();
   }else if(isAirConditioner == null){

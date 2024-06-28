@@ -1,45 +1,52 @@
-var NATURE_REMO_TOKEN = "";
-var AIRCON_ID = "エアコンのID"
+function Aircon_ON() {
+  const NATURE_REMO_TOKEN = getAccessToken();
+  const DEVICE_ID = getAirconDeviceId();
+  const url = "https://api.nature.global/1/appliances/" + DEVICE_ID + "/aircon_settings";
 
-function Aircon_ON(){
-  var url = "https://api.nature.global/1/appliances/" + AIRCON_ID + "/aircon_settings";
-
-  var headers = {
-    "Authorization": "Bearer " + NATURE_REMO_TOKEN
-  };
-
-  var payload = {
-    "button":""
-  };
-
-  var options = {
-    "method":"POST",
-    "headets": headers,
-    "payload": payload
-  };
-
-  var response = UrlFetchApp.fetch(url, options);
-  Logger.log(response.getContentText());
-
-}
-
-function Aircon_OFF() {
-  var url = "https://api.nature.global/1/appliances/" + AIRCON_ID + "/aircon_settings";
-
-  var headers = {
-    "Authorization": "Bearer " + NATURE_REMO_TOKEN
-  };
-  var payload = {
-    "button":"power-off"/*エアコンのOFFを指定*/
-  };
+  Logger.log(url);
 
   var options = {
     "method": "POST",
-    "headers": headers,
-    "payload": payload
+    "headers": {
+      "Authorization": "Bearer " + NATURE_REMO_TOKEN,
+      "Content-Type": "application/json"
+    },
+    "payload": JSON.stringify({
+      "button": "" 
+    })
   };
 
-  var response = UrlFetchApp.fetch(url, options);
-  Logger.log(response.getContentText());
+  try {
+    const response = UrlFetchApp.fetch(url, options);
+    Logger.log(response.getContentText());
+  } catch (error) {
+    Logger.log("Error: " + error);
+  }
+}
 
+
+function Aircon_OFF() {
+  const NATURE_REMO_TOKEN = getAccessToken();
+  const DEVICE_ID = getAirconDeviceId();
+  const url = "https://api.nature.global/1/appliances/" + DEVICE_ID + "/aircon_settings";
+
+  Logger.log(url);
+
+  var options = {
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer " + NATURE_REMO_TOKEN,
+      "Content-Type": "application/json"
+    },
+    "payload": JSON.stringify({
+      "button": "power-off"
+    })
+  };
+
+  try {
+    const response = UrlFetchApp.fetch(url, options);
+    Logger.log(response.getContentText());
+  } catch (error) {
+    Logger.log("Error: " + error);
+  }
 }
