@@ -13,15 +13,9 @@ function getGeocode(address) {
   }
 }
 
-// スクリプトの主要部分
-function main() {
-  var spreadsheetId = '15-uGNql16Hn7qikukdOmqbN1wYklsN76Jlh2JhWAqlE'; // 特定のスプレッドシートID
-  var sheetName = '住所'; // 操作したいシート名
+  function addGeocode(){
+  var sheet = getSheet('住所')
   
-  // 特定のスプレッドシートとシートを開く
-  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-  var sheet = spreadsheet.getSheetByName(sheetName);
-
   var range = sheet.getDataRange();
   var values = range.getValues();
   
@@ -38,4 +32,5 @@ function main() {
       sheet.getRange(i + 1, 3).setValue(geocode[1]); // 経度を3列目に書き込む
     }
   }
-}
+  }
+

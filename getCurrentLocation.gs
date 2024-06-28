@@ -1,4 +1,4 @@
-function doPost(e) {
+function getCurrentLOcation(e) {
     // iPhone（ショートカット）から送られてきた位置情報を取得
     let params = JSON.parse(e.postData.getDataAsString());
     let latitudeData = params.location.latitude;
@@ -17,7 +17,7 @@ function doPost(e) {
         }
       };
       // 位置情報があればスプレッドシートへ記録する
-      addLog(latitudeData, longitudeData);
+      addCuurentLocation(latitudeData, longitudeData);
     } else {
       result = {
         "error": {
@@ -30,8 +30,8 @@ function doPost(e) {
     output.setContent(JSON.stringify(result));
     return output;
   }
-  
-  function addLog(latitude, longitude) {
+
+  function addCuurentLocation(latitude, longitude) {
 
     let sheet = getSheet('位置情報');
 
