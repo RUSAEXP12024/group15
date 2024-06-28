@@ -45,8 +45,10 @@ function main(){
 
   if(isAirConditioner){
     /*エアコンをオンにする関数*/
+    Aircon_ON();
   }else if(!isAirConditioner){
     /*エアコンをオフにする関数*/
+    Aircon_OFF();
   }else if(isAirConditioner == null){
     console.log("エラーが起きています。");
     /*ラインに知らせる？などの関数を用意*/
