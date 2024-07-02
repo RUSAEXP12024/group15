@@ -82,7 +82,7 @@ function Aircon_COOL(){
 
 
   var postData = {
-    'operation_mode' : 'warm'
+    'operation_mode' : 'cool'
   }
 
   var options = {
