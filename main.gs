@@ -39,17 +39,19 @@ function main(){
   onRange = getSheet(DIST_DATA).getRange(6, 1, 1, 1).getValue();
   offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue();
 
-  isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に true か　false を代入*/
-  // isAirConditioner = true; //確認用
+  // isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に true か　false を代入*/
+  isAirConditioner = false; //確認用
 
   /*ジャッジの結果のbool値を基に挙動を決定　true->オン false->オフ nullまたはその他->エラー*/
 
   if(isAirConditioner == true){
     /*エアコンをオンにする関数*/
     Aircon_ON();
+    consloe.log(new Date())
   }else if(isAirConditioner == false){
     /*エアコンをオフにする関数*/
     Aircon_OFF();
+    consle.log(new Date())
   }else if(isAirConditioner == null){
     console.log("エラーが起きています。");
     /*ラインに知らせる？などの関数を用意*/
