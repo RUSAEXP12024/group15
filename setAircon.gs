@@ -1,6 +1,7 @@
+const NATURE_REMO_TOKEN = getAccessToken();
+const DEVICE_ID = getAirconDeviceId();
+
 function Aircon_ON() {
-  const NATURE_REMO_TOKEN = getAccessToken();
-  const DEVICE_ID = getAirconDeviceId();
   const url = "https://api.nature.global/1/appliances/" + DEVICE_ID + "/aircon_settings";
 
   Logger.log(url);
@@ -26,8 +27,7 @@ function Aircon_ON() {
 
 
 function Aircon_OFF() {
-  const NATURE_REMO_TOKEN = getAccessToken();
-  const DEVICE_ID = getAirconDeviceId();
+
   const url = "https://api.nature.global/1/appliances/" + DEVICE_ID + "/aircon_settings";
 
   Logger.log(url);
@@ -49,4 +49,50 @@ function Aircon_OFF() {
   } catch (error) {
     Logger.log("Error: " + error);
   }
+}
+
+function Aircon_WARM() {
+  var url = 'https://api.nature.global/1/appliances/' + DEVICE_ID + '/aircon_settings';
+  var headers = {
+    'Authorization': 'Bearer ' + REMO_ACCESS_TOKEN,
+  };
+
+
+  var postData = {
+    'operation_mode' : 'warm'
+  }
+
+  var options = {
+    muteHttpExceptions : true,
+    'method' : 'post',
+    'headers' : headers,
+    'payload' : postData
+  };
+
+  var loging = UrlFetchApp.fetch(url, options);
+
+  console.log(JSON.parse(loging));
+}
+
+function Aircon_COOL(){
+  var url = 'https://api.nature.global/1/appliances/' + DEVICE_ID + '/aircon_settings';
+  var headers = {
+    'Authorization': 'Bearer ' + REMO_ACCESS_TOKEN,
+  };
+
+
+  var postData = {
+    'operation_mode' : 'warm'
+  }
+
+  var options = {
+    muteHttpExceptions : true,
+    'method' : 'post',
+    'headers' : headers,
+    'payload' : postData
+  };
+
+  var loging = UrlFetchApp.fetch(url, options);
+
+  console.log(JSON.parse(loging));
 }
