@@ -36,8 +36,8 @@ function main(){
   setDistance(DIST_DATA, 2, dist);
   
   /*シート状に置かれた設定を代入*/
-  onRange = getSheet(DIST_DATA).getRange(6, 1, 1, 1).getValue()[0][0];
-  offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue()[0][0];
+  onRange = getSheet(DIST_DATA).getRange(6, 1, 1, 1).getValue();
+  offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue();
 
   //isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に 0, 1, 2, 3 を代入*/
   isAirConditioner = 2;
