@@ -40,6 +40,9 @@ function doPost(e) {
     }else if (userMessage == '住所を設定する') {
       mode = '住所';
       sendReplyMessage(replyToken, '住所を入力してください:(例)〇〇県◇◇市△△町▽▽');
+    }else if(userMessage == 'Error'){
+      doErrorPost('00');
+      mode = '';
     }else {
       // 数値が入力された場合
       var value = parseFloat(userMessage);
