@@ -47,7 +47,7 @@ function main(){
 
   if(isAirConditioner == 1){
     /*エアコンをオンにする関数*/
-    Aircon_ON();
+    Aircon_ON(getSheet('line').getRange(4, 2, 1, 1).getValue()[0][0], getSheet('line').getRange(2, 1, 1, 1,).getValue[0][0]);
     console.log(new Date())
   }else if(!isAirConditioner == 2){
     /*エアコンをオフにする関数*/
