@@ -139,12 +139,12 @@ function errorDoPost(type = "00"){
     "postData" : {
       "contents": JSON.stringify({
         "events": [{
-          "replyToken" : "errorReplyToken",
+          "replyToken" : 'errorReplyToken',
           "source" : {
-            "userId" : "testUserId"
+            "userId" : 'testUserId'
           },
           "message": {
-            "text" : "ERROR"
+            "text" : 'ERROR'
           }
         }]
       })
@@ -165,11 +165,6 @@ function doErrorPost(e, cause) {
     var replyToken = event.replyToken;
 
     var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-    var sheet = spreadsheet.getSheetByName(sheetName);
-    
-    if (!sheet) {
-      throw new Error('シートが見つかりません: ' + sheetName);
-    }
 
     var userProperties = PropertiesService.getScriptProperties();
     var mode = userProperties.getProperty(userId) || '';
