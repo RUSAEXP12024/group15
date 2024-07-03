@@ -56,6 +56,7 @@ function main(){
   }else if(isAirConditioner == 3){
     console.log("エラーが起きています。: Judge_return");
     /*ラインに知らせる？などの関数を用意*/
+    errorDoPost('01');
   }else if(isAirConditioner == 0){
     /*何もしない*/
   }else{

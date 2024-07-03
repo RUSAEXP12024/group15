@@ -1,3 +1,4 @@
+// @ts-nocheck
 var spreadsheetId = '15-uGNql16Hn7qikukdOmqbN1wYklsN76Jlh2JhWAqlE';
 var sheetName = 'line';
 var lineToken = 'vrdAdTJ7ZcUwNC8ciLtqZd3de8TyrQQD51yyopudq9wu1ImC0fFXehzPP1sTVyxwOU1R7sqLvKRQBqlVNi58H0TvUaEnn4nUSmowUDKULSeTk1jj47J8dzfHXLvYGJK6jbzG1gVC08uRfdArFat/agdB04t89/1O/w1cDnyilFU=';
@@ -128,4 +129,56 @@ function testDoPost() {
   };
 
   doPost(testData);
+}
+
+function errorDoPost(type = "00"){
+  var errorData = {
+    "postData" : {
+      "contents": JSON.stringify({
+        "events": [{
+          "replyToken" : "errorReplyToken",
+          "source" : {
+            "userId" : "testUserId"
+          },
+          "message": {
+            "text" : "ERROR"
+          }
+        }]
+      })
+    }
+  }
+  cause = type;
+
+  doErrorPost(errorData, cause);
+}
+
+function doErrorPost(e, cause) {
+  try {
+    Logger.log('イベントデータ: ' + JSON.stringify(e));
+    
+    var event = JSON.parse(e.postData.contents).events[0];
+    var userId = event.source.userId;
+    var userMessage = event.message.text;
+    var replyToken = event.replyToken;
+
+    var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+    var sheet = spreadsheet.getSheetByName(sheetName);
+    
+    if (!sheet) {
+      throw new Error('シートが見つかりません: ' + sheetName);
+    }
+
+    var userProperties = PropertiesService.getScriptProperties();
+    var mode = userProperties.getProperty(userId) || '';
+
+    if(cause == '00'){
+      sendReplyMessage(replyToken, 'Error message: ' + cause + '.');
+    }else if(cause == '01'){
+      sendReplyMessage(replyToken, 'Error message: ' + cause + '.\nThere is unexpected processing error.');
+    }
+
+    userProperties.setProperty(userId, mode);
+  } catch (error) {
+    Logger.log('エラー: ' + error.message);
+  }
 }
