@@ -37,12 +37,14 @@ function doPost(e) {
     }else if(userMessage == '冷房にする'){
       sendReplyMessage(replyToken, '冷房に設定しました');
       sheet.getRange('D1').setValue('冷房');
-    }else if (userMessage == '住所を設定する') {
+    }else if(userMessage == '住所を設定する') {
       mode = '住所';
       sendReplyMessage(replyToken, '住所を入力してください:(例)〇〇県◇◇市△△町▽▽');
     }else if(userMessage == 'Error'){
       errorDoPost('00');
       mode = '';
+      console.log("Errored.");
+      return;
     }else {
       // 数値が入力された場合
       var value = parseFloat(userMessage);
