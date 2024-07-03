@@ -1,6 +1,6 @@
 function judgeDistance(offRange, onRange) {
-  let beforelocate = getSheet('DATA').getRange(2, 2, 1, 1).getValue()[0][0];
-  let nowlocate = getSheet('DATA').getRange(1, 2, 1, 1).getValue()[0][0];
+  let beforelocate = getSheet('DATA').getRange(2, 2, 1, 1).getValue();
+  let nowlocate = getSheet('DATA').getRange(1, 2, 1, 1).getValue();
   console.log("before locate = " + beforelocate);
   console.log("no locate = "+ nowlocate);
   
