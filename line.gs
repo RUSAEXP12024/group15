@@ -41,10 +41,8 @@ function doPost(e) {
       mode = '住所';
       sendReplyMessage(replyToken, '住所を入力してください:(例)〇〇県◇◇市△△町▽▽');
     }else if(userMessage == 'Error'){
-      errorDoPost('00');
-      mode = '';
       console.log("Errored.");
-      return;
+      mode = 'error';
     }else {
       // 数値が入力された場合
       var value = parseFloat(userMessage);
@@ -74,6 +72,9 @@ function doPost(e) {
             sendReplyMessage(replyToken, '停止範囲が設定されました: ' + value);
             mode = ''; // 成功時にリセット
           }
+        } else if (mode == 'error'){
+          sendReplyMessage(replyToken, 'Some Error is happenning.');
+          mode = '';
         }
       }else {
         if (mode == '住所') {
@@ -136,49 +137,21 @@ function testDoPost() {
   doPost(testData);
 }
 
-function errorDoPost(type = "00"){
+function errorPost(){
   var errorData = {
-    "postData" : {
+    "postData": {
       "contents": JSON.stringify({
         "events": [{
-          "replyToken" : 'errorReplyToken',
-          "source" : {
-            "userId" : 'testUserId'
+          "replyToken": "testReplyToken",
+          "source": {
+            "userId": "testUserId"
           },
           "message": {
-            "text" : 'ERROR'
+            "text": "Error"
           }
         }]
       })
     }
-  }
-  cause = type;
-
-  doErrorPost(errorData, cause);
-}
-
-function doErrorPost(e, cause) {
-  try {
-    Logger.log('イベントデータ: ' + JSON.stringify(e));
-    
-    var event = JSON.parse(e.postData.contents).events[0];
-    var userId = event.source.userId;
-    var userMessage = event.message.text;
-    var replyToken = event.replyToken;
-
-    var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-
-    var userProperties = PropertiesService.getScriptProperties();
-    var mode = userProperties.getProperty(userId) || '';
-
-    if(cause == '00'){
-      sendReplyMessage(replyToken, 'Error message: ' + cause + '.');
-    }else if(cause == '01'){
-      sendReplyMessage(replyToken, 'Error message: ' + cause + '.\nThere is unexpected processing error.');
-    }
-
-    userProperties.setProperty(userId, mode);
-  } catch (error) {
-    Logger.log('エラー: ' + error.message);
-  }
+  };
+  doPost(errorData);
 }

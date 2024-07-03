@@ -40,14 +40,14 @@ function main(){
   offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue();
 
   //isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に 0, 1, 2, 3 を代入*/
-  isAirConditioner = 2;
+  isAirConditioner = 3;
   /*確認用*/
 
   /*ジャッジの結果のを基に挙動を決定　0->何もしない 1->オン 2->オフ 3またはその他->エラー*/
 
   if(isAirConditioner == 1){
     /*エアコンをオンにする関数*/
-    Aircon_ON(getSheet('line').getRange(4, 2, 1, 1).getValue()[0][0], getSheet('line').getRange(2, 1, 1, 1,).getValue[0][0]);
+    Aircon_ON(getSheet('line').getRange(2, 4, 1, 1).getValue(), getSheet('line').getRange(2, 1, 1, 1,).getValue);
     console.log(new Date())
   }else if(!isAirConditioner == 2){
     /*エアコンをオフにする関数*/
@@ -56,7 +56,7 @@ function main(){
   }else if(isAirConditioner == 3){
     console.log("エラーが起きています。: Judge_return");
     /*ラインに知らせる？などの関数を用意*/
-    errorDoPost('01');
+    errorPost();
   }else if(isAirConditioner == 0){
     /*何もしない*/
   }else{
