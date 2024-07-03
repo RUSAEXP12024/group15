@@ -7,7 +7,7 @@ let ROUND = 2; /*四捨五入範囲 デフォルト:2*/
 let onRange;
 let offRange;
 
-let isAirConditioner = 2;
+let isAirConditioner = false;
 
 var arg1 = {
   latitude:0,
@@ -22,7 +22,7 @@ var arg2 = {
 function main(){
   /*現在の経緯度と家の経緯度をそれぞれ arg1, arg2 に代入*/
   arg1 = getLocateData(GET_FROM, 2, 1);
-  arg2 = getLocateData(HOME_LOCATE, 2, 2);
+  arg2 = getLocateData(HOME_LOCATE, 1, 2);
   console.log(arg1)
   console.log(arg2)
 
@@ -39,26 +39,22 @@ function main(){
   onRange = getSheet(DIST_DATA).getRange(6, 1, 1, 1).getValue();
   offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue();
 
-  //isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に 0, 1, 2, 3 を代入*/
-  isAirConditioner = 2;
-  /*確認用*/
+  // isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に true か　false を代入*/
+  isAirConditioner = false; //確認用
 
-  /*ジャッジの結果のを基に挙動を決定　0->何もしない 1->オン 2->オフ 3またはその他->エラー*/
+  /*ジャッジの結果のbool値を基に挙動を決定　true->オン false->オフ nullまたはその他->エラー*/
 
-  if(isAirConditioner == 1){
+  if(isAirConditioner == true){
     /*エアコンをオンにする関数*/
     Aircon_ON();
-    console.log(new Date())
-  }else if(!isAirConditioner == 2){
+    consloe.log(new Date())
+  }else if(isAirConditioner == false){
     /*エアコンをオフにする関数*/
     Aircon_OFF();
-    console.log(new Date())
-  }else if(isAirConditioner == 3){
-    console.log("エラーが起きています。: Judge_return");
+    consle.log(new Date())
+  }else if(isAirConditioner == null){
+    console.log("エラーが起きています。");
     /*ラインに知らせる？などの関数を用意*/
-    errorDoPost('01');
-  }else if(isAirConditioner == 0){
-    /*何もしない*/
   }else{
     console.error("エラー：予期しない状態です。: isAirConditioner");
   }

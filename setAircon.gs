@@ -1,98 +1,54 @@
-const NATURE_REMO_TOKEN = getAccessToken();
-const DEVICE_ID = getAirconDeviceId();
-const url = "https://api.nature.global/1/appliances/" + DEVICE_ID + "/aircon_settings";
+var token = getAccessToken();
+var deviceId = getAirconDeviceId();
+var operationMode = "";
 
-function Aircon_ON() {
+function Aircon_ON(mode, temp) {
+  var url = "https://api.nature.global/1/appliances/" + deviceId + "/aircon_settings"; // Nature Remo3 APIのエアコン設定エンドポイント
+
+  if (mode === 0) {
+    operationMode = "warm";
+  } else {
+    operationMode = "cool";
+  }
+
+  var headers = {
+    "Authorization": "Bearer " + token
+  };
+  var payload = {
+    "button":"",/*エアコンのONはbuttonに空文字*/
+    "operation_mode": operationMode,
+    "temperature" : temp.toString()
+  };
 
   var options = {
     "method": "POST",
-    "headers": {
-      "Authorization": "Bearer " + NATURE_REMO_TOKEN,
-      "Content-Type": "application/json"
-    },
-    "payload": JSON.stringify({
-      "button": "" 
-    })
+    "headers": headers,
+    "payload": payload
   };
 
-  try {
-    const response = UrlFetchApp.fetch(url, options);
-    Logger.log(response.getContentText());
-  } catch (error) {
-    Logger.log("Error: " + error);
-  }
-
+  var response = UrlFetchApp.fetch(url, options);
+  Logger.log(response.getContentText());
 }
-
 
 function Aircon_OFF() {
+  var url = "https://api.nature.global/1/appliances/" + deviceId + "/aircon_settings"; // Nature Remo3 APIのエアコン設定エンドポイント
+
+  var headers = {
+    "Authorization": "Bearer " + token
+  };
+  var payload = {
+    "button":"power-off"/*エアコンのOFFを指定*/
+  };
 
   var options = {
     "method": "POST",
-    "headers": {
-      "Authorization": "Bearer " + NATURE_REMO_TOKEN,
-      "Content-Type": "application/json"
-    },
-    "payload": JSON.stringify({
-      "button": "power-off"
-    })
+    "headers": headers,
+    "payload": payload
   };
 
-  try {
-    const response = UrlFetchApp.fetch(url, options);
-    Logger.log(response.getContentText());
-  } catch (error) {
-    Logger.log("Error: " + error);
-  }
+  var response = UrlFetchApp.fetch(url, options);
+  Logger.log(response.getContentText());
 
-}
-
-function Aircon_WARM() {
-
-  var headers = {
-    'Authorization': 'Bearer ' + REMO_ACCESS_TOKEN,
-  };
-
-
-  var postData = {
-    'operation_mode' : 'warm',
-    'temperature' : '27'
-  }
-
-  var options = {
-    muteHttpExceptions : true,
-    'method' : 'post',
-    'headers' : headers,
-    'payload' : postData
-  };
-
-  var loging = UrlFetchApp.fetch(url, options);
-
-  console.log(JSON.parse(loging));
-
-}
-
-function Aircon_COOL(){
-
-  var headers = {
-    'Authorization': 'Bearer ' + REMO_ACCESS_TOKEN,
-  };
-
-
-  var postData = {
-    'operation_mode' : 'cool',
-    'temperature' : '21'
-  }
-
-  var options = {
-    muteHttpExceptions : true,
-    'method' : 'post',
-    'headers' : headers,
-    'payload' : postData
-  };
-
-  var loging = UrlFetchApp.fetch(url, options);
-
-  console.log(JSON.parse(loging));
-
+  message = "エアコンをOFFにしました";
+  return message;
 }
