@@ -1,5 +1,5 @@
 let GET_FROM = '位置情報'; /*位置情報のシート名*/
-let HOME_LOCATE = '住所'; /*住所のシート名*/
+let HOME_LOCATE = 'line'; /*住所のシート名*/
 let DIST_DATA = 'DATA'; /*距離データのシート名*/
 let UNIT = 'meters'; /*単位 'miles' か 'kilometers' か 'meters' デフォルト:miles*/
 let ROUND = 2; /*四捨五入範囲 デフォルト:2*/
@@ -22,7 +22,7 @@ var arg2 = {
 function main(){
   /*現在の経緯度と家の経緯度をそれぞれ arg1, arg2 に代入*/
   arg1 = getLocateData(GET_FROM, 2, 1);
-  arg2 = getLocateData(HOME_LOCATE, 2, 2);
+  arg2 = getLocateData(HOME_LOCATE, 2, 6);
   console.log(arg1)
   console.log(arg2)
 
