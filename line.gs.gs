@@ -1,4 +1,3 @@
-// @ts-nocheck
 var spreadsheetId = '15-uGNql16Hn7qikukdOmqbN1wYklsN76Jlh2JhWAqlE';
 var sheetName = 'line';
 var lineToken = 'vrdAdTJ7ZcUwNC8ciLtqZd3de8TyrQQD51yyopudq9wu1ImC0fFXehzPP1sTVyxwOU1R7sqLvKRQBqlVNi58H0TvUaEnn4nUSmowUDKULSeTk1jj47J8dzfHXLvYGJK6jbzG1gVC08uRfdArFat/agdB04t89/1O/w1cDnyilFU=';
@@ -32,34 +31,19 @@ function doPost(e) {
       mode = '停止範囲';
       sendReplyMessage(replyToken, '停止範囲を設定してください。設定範囲:100～300');
     } else if(userMessage == '暖房にする'){
-      var mode = sheet.getRange('D2').getValue();
-      var temperature = sheet.getRange('A2').getValue();
-      var operatingRange = sheet.getRange('B2').getValue();
-      var stoppingRange = sheet.getRange('C2').getValue();
-      var mode = sheet.getRange('D2').getValue();
-      sendReplyMessage(replyToken,'暖房に設定しました'+ '\n' + 
-      'エアコンの温度：' + temperature.toFixed(1) + '\n' + 
-      'モード：' + (mode == 0 ? '暖房' : '冷房') + '\n' + 
-      '稼動範囲：' + operatingRange + '\n' + 
-      '停止範囲：' + stoppingRange);
+      sendReplyMessage(replyToken, '暖房に設定しました');
+      sheet.getRange('D2').setValue('0');
     }else if(userMessage == '冷房にする'){
-      sheet.getRange('D2').setValue(1);
-      var mode = sheet.getRange('D2').getValue();
-      var temperature = sheet.getRange('A2').getValue();
-      var operatingRange = sheet.getRange('B2').getValue();
-      var stoppingRange = sheet.getRange('C2').getValue();
-      sendReplyMessage(replyToken, '冷房に設定しました'+ '\n' + 
-      'エアコンの温度：' + temperature.toFixed(1) + '\n' + 
-      'モード：' + (mode == 0 ? '暖房' : '冷房') + '\n' + 
-      '稼動範囲：' + operatingRange + '\n' + 
-      '停止範囲：' + stoppingRange);
-      checkAndReplyAirConditionerStatus(replyToken, sheet);
-    }else if(userMessage == '住所を設定する') {
+      sendReplyMessage(replyToken, '冷房に設定しました');
+      sheet.getRange('D2').setValue('1');
+    }else if (userMessage == '住所を設定する') {
       mode = '住所';
       sendReplyMessage(replyToken, '住所を入力してください:(例)〇〇県◇◇市△△町▽▽');
     }else if(userMessage == 'Error'){
       console.log("Errored.");
-      mode = 'error';
+      errorDoPost('00');
+      mode = '';
+      return;
     }else {
       // 数値が入力された場合
       var value = parseFloat(userMessage);
@@ -70,15 +54,7 @@ function doPost(e) {
           } else {
             sheet.getRange('A2').setValue(value);
             sheet.getRange('A2').setNumberFormat('0.0');
-            var mode = sheet.getRange('D2').getValue();
-            var temperature = sheet.getRange('A2').getValue();
-            var operatingRange = sheet.getRange('B2').getValue();
-            var stoppingRange = sheet.getRange('C2').getValue();
-            sendReplyMessage(replyToken, '温度が設定されました: ' + value.toFixed(1)+'\n' + 
-            'エアコンの温度：' + temperature.toFixed(1) + '\n' + 
-            'モード：' + (mode == 0 ? '暖房' : '冷房') + '\n' + 
-            '稼動範囲：' + operatingRange + '\n' + 
-            '停止範囲：' + stoppingRange);
+            sendReplyMessage(replyToken, '温度が設定されました: ' + value.toFixed(1));
             mode = ''; // 成功時にリセット
           }
         } else if (mode == '稼働範囲') {
@@ -86,15 +62,7 @@ function doPost(e) {
             sendReplyMessage(replyToken, '設定範囲は500～1500メートルです。もう一度数値を入力してください');
           } else {
             sheet.getRange('B2').setValue(value);
-            var mode = sheet.getRange('D2').getValue();
-            var temperature = sheet.getRange('A2').getValue();
-            var operatingRange = sheet.getRange('B2').getValue();
-            var stoppingRange = sheet.getRange('C2').getValue();
-            sendReplyMessage(replyToken, '稼働範囲が設定されました: ' + value+ '\n' + 
-            'エアコンの温度：' + temperature.toFixed(1) + '\n' + 
-            'モード：' + (mode == 0 ? '暖房' : '冷房') + '\n' + 
-            '稼動範囲：' + operatingRange + '\n' + 
-            '停止範囲：' + stoppingRange);
+            sendReplyMessage(replyToken, '稼働範囲が設定されました: ' + value);
             mode = ''; // 成功時にリセット
           }
         } else if (mode == '停止範囲') {
@@ -102,25 +70,15 @@ function doPost(e) {
             sendReplyMessage(replyToken, '設定範囲は100～300メートルです。もう一度数値を入力してください');
           } else {
             sheet.getRange('C2').setValue(value);
-            var mode = sheet.getRange('D2').getValue();
-            var temperature = sheet.getRange('A2').getValue();
-            var operatingRange = sheet.getRange('B2').getValue();
-            var stoppingRange = sheet.getRange('C2').getValue();
-            sendReplyMessage(replyToken, '停止範囲が設定されました: ' + value+ '\n' + 
-            'エアコンの温度：' + temperature.toFixed(1) + '\n' + 
-            'モード：' + (mode == 0 ? '暖房' : '冷房') + '\n' + 
-            '稼動範囲：' + operatingRange + '\n' + 
-            '停止範囲：' + stoppingRange);
+            sendReplyMessage(replyToken, '停止範囲が設定されました: ' + value);
             mode = ''; // 成功時にリセット
           }
-        } else if (mode == 'error'){
-          sendReplyMessage(replyToken, 'Some Error is happenning.');
-          mode = '';
         }
       }else {
         if (mode == '住所') {
           sheet.getRange('E2').setValue(userMessage);
           sendReplyMessage(replyToken, '住所が設定されました: ' + userMessage);
+          addGeocode();
           mode = ''; // 成功時にリセット
         } else {
           sendReplyMessage(replyToken, '有効な数値または住所を入力してください');
@@ -157,8 +115,6 @@ function sendReplyMessage(replyToken, message) {
   UrlFetchApp.fetch(url, options);
 }
 
-
-
 // テスト用関数
 function testDoPost() {
   var testData = {
@@ -180,21 +136,49 @@ function testDoPost() {
   doPost(testData);
 }
 
-function errorPost(){
+function errorDoPost(type = "00"){
   var errorData = {
-    "postData": {
+    "postData" : {
       "contents": JSON.stringify({
         "events": [{
-          "replyToken": "testReplyToken",
-          "source": {
-            "userId": "testUserId"
+          "replyToken" : 'errorReplyToken',
+          "source" : {
+            "userId" : 'testUserId'
           },
           "message": {
-            "text": "Error"
+            "text" : 'ERROR'
           }
         }]
       })
     }
-  };
-  doPost(errorData);
+  }
+  cause = type;
+
+  doErrorPost(errorData, cause);
+}
+
+function doErrorPost(e, cause) {
+  try {
+    Logger.log('イベントデータ: ' + JSON.stringify(e));
+    
+    var event = JSON.parse(e.postData.contents).events[0];
+    var userId = event.source.userId;
+    var userMessage = event.message.text;
+    var replyToken = event.replyToken;
+
+    var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+
+    var userProperties = PropertiesService.getScriptProperties();
+    var mode = userProperties.getProperty(userId) || '';
+
+    if(cause == '00'){
+      sendReplyMessage(replyToken, 'Error message: ' + cause + '.');
+    }else if(cause == '01'){
+      sendReplyMessage(replyToken, 'Error message: ' + cause + '.\nThere is unexpected processing error.');
+    }
+
+    userProperties.setProperty(userId, mode);
+  } catch (error) {
+    Logger.log('エラー: ' + error.message);
+  }
 }

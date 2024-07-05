@@ -1,14 +1,18 @@
 var token = getAccessToken();
 var deviceId = getAirconDeviceId();
 var operationMode = "";
+var operation = 1;
+var stop = 0;
 
 function Aircon_ON(mode, temp) {
   var url = "https://api.nature.global/1/appliances/" + deviceId + "/aircon_settings"; // Nature Remo3 APIのエアコン設定エンドポイント
 
-  if (mode === 0) {
+  if (mode == 0) {
     operationMode = "warm";
-  } else {
+  } else if(mode == 1){
     operationMode = "cool";
+  }else{
+    console.log('例外');
   }
 
   var headers = {
@@ -28,6 +32,8 @@ function Aircon_ON(mode, temp) {
 
   var response = UrlFetchApp.fetch(url, options);
   Logger.log(response.getContentText());
+
+  setOperation(operation);
 }
 
 function Aircon_OFF() {
@@ -49,6 +55,5 @@ function Aircon_OFF() {
   var response = UrlFetchApp.fetch(url, options);
   Logger.log(response.getContentText());
 
-  message = "エアコンをOFFにしました";
-  return message;
+  setOperation(stop);
 }
