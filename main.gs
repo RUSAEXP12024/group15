@@ -1,6 +1,6 @@
 let GET_FROM = '位置情報'; /*位置情報のシート名*/
 let HOME_LOCATE = 'line'; /*住所のシート名*/
-let DIST_DATA = 'DATA'; /*距離データのシート名*/
+let DIST_DATA = 'Data'; /*距離データのシート名*/
 let UNIT = 'meters'; /*単位 'miles' か 'kilometers' か 'meters' デフォルト:miles*/
 let ROUND = 2; /*四捨五入範囲 デフォルト:2*/
 
@@ -36,11 +36,12 @@ function main(){
   setDistance(DIST_DATA, 2, dist);
   
   /*シート状に置かれた設定を代入*/
-  onRange = getSheet(DIST_DATA).getRange(6, 1, 1, 1).getValue();
-  offRange = getSheet(DIST_DATA).getRange(5, 1, 1, 1).getValue();
+  onRange = getSheet(HOME_LOCATE).getRange(2,2).getValue();
+  offRange = getSheet(HOME_LOCATE).getRange(2,3).getValue();
+  console.log(onRange,offRange);
 
   isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に 0, 1, 2, 3 を代入*/
-  // isAirConditioner = 2;
+  // isAirConditioner = 3;
   /*確認用*/
 
   /*ジャッジの結果のを基に挙動を決定　0->何もしない 1->オン 2->オフ 3またはその他->エラー*/

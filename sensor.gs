@@ -55,6 +55,5 @@ function gettingData(char, a, b, c, d){
 }
 
 function setOperation(operation) {
-  let sheet = getSheet('line');
-  sheet.getRange(2, 8).setValue(operation); // 緯度を2列目に書き込む
+  getSheet('line').getRange(2, 8).setValue(operation);
 }
