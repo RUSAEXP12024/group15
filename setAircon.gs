@@ -33,7 +33,9 @@ function Aircon_ON(mode, temp) {
   var response = UrlFetchApp.fetch(url, options);
   Logger.log(response.getContentText());
 
-  setOperation(operation);
+  sendPushMessage('エアコンを起動しました');
+
+  // setOperation(operation);
 }
 
 function Aircon_OFF() {
@@ -55,5 +57,6 @@ function Aircon_OFF() {
   var response = UrlFetchApp.fetch(url, options);
   Logger.log(response.getContentText());
 
-  setOperation(stop);
+  sendPushMessage('エアコンを停止しました');
+  // setOperation(stop);
 }

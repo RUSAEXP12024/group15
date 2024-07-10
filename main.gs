@@ -21,19 +21,19 @@ var arg2 = {
 
 function main(){
   /*現在の経緯度と家の経緯度をそれぞれ arg1, arg2 に代入*/
-  arg1 = getLocateData(GET_FROM, 2, 1);
-  arg2 = getLocateData(HOME_LOCATE, 2, 6);
-  console.log(arg1)
-  console.log(arg2)
+  // arg1 = getLocateData(GET_FROM, 2, 1);
+  // arg2 = getLocateData(HOME_LOCATE, 2, 6);
+  // console.log(arg1)
+  // console.log(arg2)
 
   /*計算結果を dist に代入*/
-  let dist = cul_dist(arg1.latitude, arg1.longitude, arg2.latitude, arg2.longitude, UNIT, ROUND);
+  // let dist = cul_dist(arg1.latitude, arg1.longitude, arg2.latitude, arg2.longitude, UNIT, ROUND);
 
   /*前の距離のデータをコピーしておく*/
-  dataCopy(DIST_DATA, DIST_DATA, 2, 1);
+  // dataCopy(DIST_DATA, DIST_DATA, 2, 1);
   
   /*現在距離を更新*/
-  setDistance(DIST_DATA, 2, dist);
+  // setDistance(DIST_DATA, 2, dist);
   
   /*シート状に置かれた設定を代入*/
   onRange = getSheet(HOME_LOCATE).getRange(2,2).getValue();
