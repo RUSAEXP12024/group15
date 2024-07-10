@@ -1,0 +1,39 @@
+var spreadsheetId = '15-uGNql16Hn7qikukdOmqbN1wYklsN76Jlh2JhWAqlE';
+var sheetName = 'line';
+var lineToken = 'vrdAdTJ7ZcUwNC8ciLtqZd3de8TyrQQD51yyopudq9wu1ImC0fFXehzPP1sTVyxwOU1R7sqLvKRQBqlVNi58H0TvUaEnn4nUSmowUDKULSeTk1jj47J8dzfHXLvYGJK6jbzG1gVC08uRfdArFat/agdB04t89/1O/w1cDnyilFU=';
+
+function sendCellValueToLine() {
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  var sheet = spreadsheet.getSheetByName(sheetName);
+  
+  // H2セルの値を取得
+  var cellValue = sheet.getRange('H2').getValue();
+  
+  var message = (cellValue == 1) ? 'エアコンが起動しました' : 'エアコンが停止しました';
+  
+  // 設定されたメッセージをLINEに送信
+  sendPushMessage(message);
+}
+
+function sendPushMessage(message) {
+  var url = 'https://api.line.me/v2/bot/message/push';
+  var payload = {
+    to: 'U546bc02536d4ed8eef15810bc32f089c',  // 送信先のLINEユーザーID
+
+    messages: [{
+      type: 'text',
+      text: message
+    }]
+  };
+  
+  var options = {
+    'method': 'post',
+    'headers': {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + lineToken
+    },
+    'payload': JSON.stringify(payload)
+  };
+  
+  UrlFetchApp.fetch(url, options);
+}
