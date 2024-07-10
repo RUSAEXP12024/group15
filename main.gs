@@ -3,7 +3,7 @@ let HOME_LOCATE = 'line'; /*住所のシート名*/
 let DIST_DATA = 'Data'; /*距離データのシート名*/
 let UNIT = 'meters'; /*単位 'miles' か 'kilometers' か 'meters' デフォルト:miles*/
 let ROUND = 2; /*四捨五入範囲 デフォルト:2*/
-let userId = PropertiesService.getScriptProperties().getProperty('userId');
+var userId = PropertiesService.getScriptProperties().getProperty('userId');
 
 let onRange;
 let offRange;
