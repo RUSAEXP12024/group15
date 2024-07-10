@@ -49,11 +49,13 @@ function main(){
   if(isAirConditioner == 1){
     /*エアコンをオンにする関数*/
     console.log(getSheet('line').getRange(2, 4, 1, 1).getValue());
-    Aircon_ON(getSheet('line').getRange(2, 4, 1, 1).getValue(), getSheet('line').getRange(2, 1, 1, 1).getValue());
-    console.log(new Date())
+    if(getAirconData() == 0){
+       Aircon_ON(getSheet('line').getRange(2, 4, 1, 1).getValue(), getSheet('line').getRange(2, 1, 1, 1).getValue());
+       console.log(new Date());
+    }
   }else if(isAirConditioner == 2){
     /*エアコンをオフにする関数*/
-    console.log("OK");
+    // console.log("OK");
     Aircon_OFF();
     console.log(new Date())
   }else if(isAirConditioner == 3){

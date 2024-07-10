@@ -80,9 +80,8 @@ function doPost(e) {
             '稼動範囲：' + operatingRange + '\n' + 
             '停止範囲：' + stoppingRange);
             mode = ''; // 成功時にリセット
-            if(sheet.getRange(2,8).getValue() == 1){
-              tempUp(temperature);
-              sendPushMessage(replyToken, 'OK');
+            if(getAirconData() == 1){
+              changetemp(temperature);
             }
           }
         } else if (mode == '稼働範囲') {
