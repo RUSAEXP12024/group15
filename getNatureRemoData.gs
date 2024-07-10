@@ -20,5 +20,6 @@ function getNatureRemoData() {
     return appliance.type === 'AC';
   });
 
+
   return airConData;
 }

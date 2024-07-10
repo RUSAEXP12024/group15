@@ -3,6 +3,7 @@ let HOME_LOCATE = 'line'; /*住所のシート名*/
 let DIST_DATA = 'Data'; /*距離データのシート名*/
 let UNIT = 'meters'; /*単位 'miles' か 'kilometers' か 'meters' デフォルト:miles*/
 let ROUND = 2; /*四捨五入範囲 デフォルト:2*/
+let userId = PropertiesService.getScriptProperties().getProperty('userId');
 
 let onRange;
 let offRange;
@@ -21,23 +22,23 @@ var arg2 = {
 
 function main(){
   /*現在の経緯度と家の経緯度をそれぞれ arg1, arg2 に代入*/
-  // arg1 = getLocateData(GET_FROM, 2, 1);
-  // arg2 = getLocateData(HOME_LOCATE, 2, 6);
-  // console.log(arg1)
-  // console.log(arg2)
+  arg1 = getLocateData(GET_FROM, 2, 1);
+  arg2 = getLocateData(userId, 2, 6);
+  console.log(arg1)
+  console.log(arg2)
 
   /*計算結果を dist に代入*/
-  // let dist = cul_dist(arg1.latitude, arg1.longitude, arg2.latitude, arg2.longitude, UNIT, ROUND);
+  let dist = cul_dist(arg1.latitude, arg1.longitude, arg2.latitude, arg2.longitude, UNIT, ROUND);
 
   /*前の距離のデータをコピーしておく*/
-  // dataCopy(DIST_DATA, DIST_DATA, 2, 1);
+  dataCopy(DIST_DATA, DIST_DATA, 2, 1);
   
   /*現在距離を更新*/
-  // setDistance(DIST_DATA, 2, dist);
+  setDistance(DIST_DATA, 2, dist);
   
   /*シート状に置かれた設定を代入*/
-  onRange = getSheet(HOME_LOCATE).getRange(2,2).getValue();
-  offRange = getSheet(HOME_LOCATE).getRange(2,3).getValue();
+  onRange = getSheet(userId).getRange(2,2).getValue();
+  offRange = getSheet(userId).getRange(2,3).getValue();
   console.log(onRange,offRange);
 
   isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に 0, 1, 2, 3 を代入*/

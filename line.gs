@@ -12,22 +12,22 @@ function doPost(e) {
     var userMessage = event.message.text;
     var replyToken = event.replyToken;
 
-    var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-    var sheet = spreadsheet.getSheetByName(sheetName);
+    var sheet = getSheet(userId);
     
     if (!sheet) {
       throw new Error('シートが見つかりません: ' + sheetName);
     }
-
+    
     var userProperties = PropertiesService.getScriptProperties();
     var mode = userProperties.getProperty(userId) || '';
+    userProperties.setProperty('userId', userId);
 
     if (userMessage == '温度を設定する') {
       mode = '温度';
       sendReplyMessage(replyToken, '温度を入力してください。設定範囲:18～32');
     } else if (userMessage == '稼働範囲を設定する') {
       mode = '稼働範囲';
-      sendReplyMessage(replyToken, '可動範囲を設定してください。設定範囲:500～1500');
+      sendReplyMessage(replyToken, '稼働範囲を設定してください。設定範囲:500～1500');
     } else if (userMessage == '停止範囲を設定する') {
       mode = '停止範囲';
       sendReplyMessage(replyToken, '停止範囲を設定してください。設定範囲:100～300');
@@ -123,6 +123,7 @@ function doPost(e) {
       }else {
         if (mode == '住所') {
           sheet.getRange('E2').setValue(userMessage);
+          addGeocode(userId, userMessage);
           sendReplyMessage(replyToken, '住所が設定されました: ' + userMessage);
           mode = ''; // 成功時にリセット
         } else {
@@ -181,6 +182,10 @@ function sendPushMessage(message) {
   };
   
   UrlFetchApp.fetch(url, options);
+}
+
+function infoUser(e){
+
 }
 
 

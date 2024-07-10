@@ -3,6 +3,7 @@ var deviceId = getAirconDeviceId();
 var operationMode = "";
 var operation = 1;
 var stop = 0;
+var userId = PropertiesService.getScriptProperties().getProperty('userId');
 
 function Aircon_ON(mode, temp) {
   var url = "https://api.nature.global/1/appliances/" + deviceId + "/aircon_settings"; // Nature Remo3 APIのエアコン設定エンドポイント
@@ -67,7 +68,7 @@ function Aircon_OFF() {
 function changetemp(temp){
   var url = "https://api.nature.global/1/appliances/" + deviceId + "/aircon_settings"; // Nature Remo3 APIのエアコン設定エンドポイント
 
-  // temp = "21";
+  // temp = "24";
 
   var headers = {
     "Authorization": "Bearer " + token
@@ -86,5 +87,7 @@ function changetemp(temp){
 
   var response = UrlFetchApp.fetch(url, options);
   Logger.log(response.getContentText()); //動作確認用
+  getSheet('line').getRange(5,5).setValue(userId);
+  // console.log(userId);
 
 }
