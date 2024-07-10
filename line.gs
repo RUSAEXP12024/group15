@@ -80,6 +80,10 @@ function doPost(e) {
             '稼動範囲：' + operatingRange + '\n' + 
             '停止範囲：' + stoppingRange);
             mode = ''; // 成功時にリセット
+            if(sheet.getRange(2,8).getValue() == 1){
+              tempUp(temperature);
+              sendPushMessage(replyToken, 'OK');
+            }
           }
         } else if (mode == '稼働範囲') {
           if (value < 500 || value > 1500) {

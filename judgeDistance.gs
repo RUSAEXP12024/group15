@@ -24,7 +24,7 @@ function judgeDistance(offRange, onRange) {
       return 2;
       break;
     default:
-      console.error("エラー：予期しない状態です。")
+      // console.error("エラー：予期しない状態です。")
       console.log("before locate =" + beforelocate);
       console.log("now locate = " + nowlocate);
       return 3;
