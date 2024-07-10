@@ -160,6 +160,29 @@ function sendReplyMessage(replyToken, message) {
   UrlFetchApp.fetch(url, options);
 }
 
+function sendPushMessage(message) {
+  var url = 'https://api.line.me/v2/bot/message/push';
+  var payload = {
+    to: 'Ua22bd17e838a73c6f6ce552031831ccc',  // 送信先のLINEユーザーID
+
+    messages: [{
+      type: 'text',
+      text: message
+    }]
+  };
+  
+  var options = {
+    'method': 'post',
+    'headers': {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + lineToken
+    },
+    'payload': JSON.stringify(payload)
+  };
+  
+  UrlFetchApp.fetch(url, options);
+}
+
 
 
 // テスト用関数
