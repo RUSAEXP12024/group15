@@ -1,8 +1,10 @@
 function judgeDistance(offRange, onRange) {
-  let beforelocate = getSheet('DATA').getRange(2, 2, 1, 1).getValue();
-  let nowlocate = getSheet('DATA').getRange(1, 2, 1, 1).getValue();
+  let beforelocate = getSheet('DATA').getRange(2,2).getValue();
+  let nowlocate = getSheet('DATA').getRange(2,1).getValue();
   console.log("before locate = " + beforelocate);
-  console.log("no locate = "+ nowlocate);
+  console.log("now locate = "+ nowlocate);
+  console.log("onrange = "+ onRange);
+  console.log("offrange = "+offRange);
   
   switch(true){
     case onRange <= beforelocate && onRange <= nowlocate || onRange >= beforelocate && offRange <= beforelocate && onRange >= nowlocate && offRange <= nowlocate || offRange >= beforelocate && offRange >= nowlocate:

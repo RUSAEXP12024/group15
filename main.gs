@@ -41,7 +41,7 @@ function main(){
   console.log(onRange,offRange);
 
   isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に 0, 1, 2, 3 を代入*/
-  // isAirConditioner = 3;
+  // isAirConditioner = 1;
   /*確認用*/
 
   /*ジャッジの結果のを基に挙動を決定　0->何もしない 1->オン 2->オフ 3またはその他->エラー*/
