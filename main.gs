@@ -49,9 +49,9 @@ function main(){
 
   if(isAirConditioner == 1){
     /*エアコンをオンにする関数*/
-    console.log(getSheet('line').getRange(2, 4, 1, 1).getValue());
+    // console.log(getSheet('line').getRange(2, 4, 1, 1).getValue());
     if(getAirconData() == 0){
-       Aircon_ON(getSheet('line').getRange(2, 4, 1, 1).getValue(), getSheet('line').getRange(2, 1, 1, 1).getValue());
+       Aircon_ON(getSheet(userId).getRange(2,4).getValue(), getSheet('line').getRange(2,1).getValue());
        console.log(new Date());
     }
   }else if(isAirConditioner == 2){
