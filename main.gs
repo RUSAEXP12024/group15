@@ -42,18 +42,18 @@ function main(){
   console.log(onRange,offRange);
 
   isAirConditioner = judgeDistance(offRange, onRange); /*isAirConditioner に 0, 1, 2, 3 を代入*/
+  console.log(isAirConditioner);
   // isAirConditioner = 1;
   /*確認用*/
 
   /*ジャッジの結果のを基に挙動を決定　0->何もしない 1->オン 2->オフ 3またはその他->エラー*/
 
   if(isAirConditioner == 1){
-    /*エアコンをオンにする関数*/
-    // console.log(getSheet('line').getRange(2, 4, 1, 1).getValue());
     if(getAirconData() == 0){
-       Aircon_ON(getSheet(userId).getRange(2,4).getValue(), getSheet('line').getRange(2,1).getValue());
+       Aircon_ON(getSheet(userId).getRange(2,4).getValue(), getSheet(userId).getRange(2,1).getValue());
        console.log(new Date());
     }
+    console.log(getAirconData());
   }else if(isAirConditioner == 2){
     /*エアコンをオフにする関数*/
     // console.log("OK");
