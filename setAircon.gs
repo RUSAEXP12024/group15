@@ -87,7 +87,7 @@ function changetemp(temp){
 
   var response = UrlFetchApp.fetch(url, options);
   Logger.log(response.getContentText()); //動作確認用
-  getSheet('line').getRange(5,5).setValue(userId);
+  // getSheet('line').getRange(5,5).setValue(userId);
   // console.log(userId);
 
 }

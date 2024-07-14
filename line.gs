@@ -18,10 +18,6 @@ function doPost(e) {
     // }
     var sheet = getSheet(userId);
     
-    if (!sheet) {
-      throw new Error('シートが見つかりません: ' + sheetName);
-    }
-    
     var userProperties = PropertiesService.getScriptProperties();
     var mode = userProperties.getProperty(userId) || '';
     userProperties.setProperty('userId', userId);

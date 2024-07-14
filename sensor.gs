@@ -29,6 +29,6 @@ function gettingData(char, a, b, c, d){
   return K;
 }
 
-function setOperation(operation) {
-  getSheet('line').getRange(2, 8).setValue(operation);
-}
+// function setOperation(operation) {
+//   getSheet('line').getRange(2, 8).setValue(operation);
+// }
