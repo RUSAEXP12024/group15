@@ -29,14 +29,14 @@ function insertSheet(name) {
   return newSheet;
 }
 
-// function deleteSheet(name){
-//   // name = "Ua22bd17e838a73c6f6ce552031831ccc";
-//   let sheet= spreadsheet.getSheetByName(name);
-//   if(sheet){
-//     spreadsheet.deleteSheet(sheet);
-//     Logger.log('シートを削除しました: ' + name);
-//   }else{
-//     Logger.log('シートが見つかりません: ' + name);
-//   }
+function deleteSheet(name){
+  // name = "Ua22bd17e838a73c6f6ce552031831ccc";
+  let sheet= spreadsheet.getSheetByName(name);
+  if(sheet){
+    spreadsheet.deleteSheet(sheet);
+    Logger.log('シートを削除しました: ' + name);
+  }else{
+    Logger.log('シートが見つかりません: ' + name);
+  }
 
-// }
+}

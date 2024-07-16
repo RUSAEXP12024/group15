@@ -8,15 +8,16 @@ function doPost(e) {
     Logger.log('イベントデータ: ' + JSON.stringify(e));
     
     var event = JSON.parse(e.postData.contents).events[0];
-    var type = event.type
+    var type = event.type;
     var userId = event.source.userId;
-    var userMessage = event.message.text;
+    // var userMessage = event.message.text;
     var replyToken = event.replyToken;
-
-    // if(type == "unfollow"){
-    //   deleteSheet(userId);
-    // }
     var sheet = getSheet(userId);
+    
+    if(type == "unfollow"){
+      deleteSheet(userId);
+    }
+    var userMessage = event.message.text;
     
     var userProperties = PropertiesService.getScriptProperties();
     var mode = userProperties.getProperty(userId) || '';
@@ -228,4 +229,21 @@ function errorPost(){
     }
   };
   doPost(errorData);
+}
+
+function testUnfollow() {
+  var testData = {
+    "postData": {
+      "contents": JSON.stringify({
+        "events": [{
+          "type": "unfollow",
+          "source": {
+            "userId": "Ua22bd17e838a73c6f6ce552031831ccc"
+          }
+        }]
+      })
+    }
+  };
+
+  doPost(testData);
 }
