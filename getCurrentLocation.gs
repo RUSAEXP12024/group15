@@ -18,6 +18,7 @@ function getCurrentLOcation(e) {
       };
       // 位置情報があればスプレッドシートへ記録する
       addCuurentLocation(latitudeData, longitudeData);
+      main();
     } else {
       result = {
         "error": {
@@ -34,6 +35,7 @@ function getCurrentLOcation(e) {
   function addCuurentLocation(latitude, longitude) {
 
     let sheet = getSheet('位置情報');
+    // let sheet = getSheet(userId);
 
   // 既存のデータを下にシフトする
   let range = sheet.getRange("A2:B2"); // 既存の最初の行を選択

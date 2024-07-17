@@ -14,7 +14,8 @@ function getSheet(name) {
     sheet.getRange(1,5).setValue("住所");
     sheet.getRange(1,6).setValue("緯度");
     sheet.getRange(1,7).setValue("経度");
-    // sheet.getRange(1,8).setValue("稼働状況");
+    sheet.getRange(1,8).setValue("userId");
+    sheet.getRange(2,8).setValue(name);
   }
 
   return sheet;
